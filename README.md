@@ -1,11 +1,15 @@
 # Job Search & Cover Letter Assistant
 
+[![Open in Davia](https://cdn.trydavia.com/button.svg)](https://app.trydavia.com/clone?repoUrl=https://github.com/davialabs/job-app)
+
+**Source Code**: [https://github.com/davialabs/job-app](https://github.com/davialabs/job-app)
+
 This project provides a set of tools to help with the job application process. It can:
 
 1.  **Scrape job listings**: Fetch the latest job postings from various job boards based on your search criteria.
 2.  **Generate cover letters**: Automatically create tailored cover letters using AI, based on a job description and your resume.
 
-This application is built using the **Davia** framework, which helps create a complete app directly from your Python backend logic. You can find more information about Davia in their [official documentation](https://docs.davia.ai/introduction).
+This application is built using the **Davia** framework, which helps create a complete app directly from your Python backend logic. You can find more information about Davia in our [official documentation](https://docs.davia.ai/introduction).
 
 ## Features
 
@@ -36,7 +40,7 @@ This application is built using the **Davia** framework, which helps create a co
 - **Python 3.x**
 - **Davia**: A framework that creates a complete app (including UI) directly from your Python backend. See [Davia Documentation](https://docs.davia.ai/introduction).
   - Underlying API built with **FastAPI**.
-- **JobSpy**: For scraping job listings.
+- **JobSpy**: For scraping job listings. ([GitHub Repository](https://github.com/speedyapply/JobSpy))
 - **Pydantic & Pydantic-AI**: For data validation and AI model interaction.
 - **Google Gemini**: As the AI model for cover letter generation.
 - **PyMuPDF**: For reading PDF resumes.
@@ -83,7 +87,7 @@ To start the backend application, run:
 python src/job_search.py
 ```
 
-This will typically start a Uvicorn server, and you should see output indicating the address where the API is running (e.g., `http://127.0.0.1:8000`).
+This will typically start a Uvicorn server, and you should see output indicating the address where the API is running.
 
 Davia is designed to create a visual application around your Python tasks, so you can also interact with the application's functionalities through the Davia interface once it's set up with your Davia account.
 
@@ -100,11 +104,3 @@ The application's core logic is exposed as backend tasks, which Davia can build 
 2.  **Interact with the application:**
     - **Via Davia's Visual Interface**: If you have connected this project to your Davia account, you can use the visual editor and the generated app to run the tasks.
     - **Via API Client**: Alternatively, use an API client (like Postman, Insomnia, or `curl`) to interact with the backend endpoints directly as described above.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request or open an Issue.
-
----
-
-_This README was generated with assistance from an AI coding assistant._
