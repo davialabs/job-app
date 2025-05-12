@@ -1,9 +1,5 @@
 # Job Search & Cover Letter Assistant
 
-[![Open in Davia](https://cdn.trydavia.com/button.svg)](https://app.trydavia.com/clone?repoUrl=https://github.com/davialabs/job-app)
-
-**Source Code**: [https://github.com/davialabs/job-app](https://github.com/davialabs/job-app)
-
 This project provides a set of tools to help with the job application process. It can:
 
 1.  **Scrape job listings**: Fetch the latest job postings from various job boards based on your search criteria.
@@ -51,8 +47,8 @@ This application is built using the **Davia** framework, which helps create a co
 1.  **Clone the repository:**
 
     ```bash
-    git clone <repository-url>
-    cd <repository-name>
+    git clone https://github.com/davialabs/job-app
+    cd job-app
     ```
 
 2.  **Create and activate a virtual environment (recommended):**
