@@ -33,7 +33,6 @@ This application is built using the **Davia** framework, which helps create a co
 
 ## Technologies Used
 
-- **Python 3.x**
 - **Davia**: A framework that creates a complete app (including UI) directly from your Python backend. See [Davia Documentation](https://docs.davia.ai/introduction).
   - Underlying API built with **FastAPI**.
 - **JobSpy**: For scraping job listings. ([GitHub Repository](https://github.com/speedyapply/JobSpy))
