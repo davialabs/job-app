@@ -4,8 +4,7 @@ from fastapi import UploadFile
 from pydantic_ai import Agent
 from pydantic_ai.models.gemini import GeminiModel
 from utils import read_uploaded_file, SYSTEM_PROMPT
-import pandas as pd
-
+from pydantic import BaseModel
 from models import Job
 
 # Initialize Davia app - Davia is a framework built on top of FastAPI
@@ -13,8 +12,8 @@ from models import Job
 app = Davia(title="Job Search")
 
 # Configuration constants for job search
-SITES = ["indeed", "glassdoor"]
-RESULTS_WANTED = 30
+SITES = ["indeed", "google"]
+RESULTS_WANTED = 40
 HOURS_OLD = 72
 MODEL = "gemini-2.0-flash"
 
@@ -48,7 +47,10 @@ def display_latest_jobs(job_title: str, job_location: str) -> list[Job | None]:
         results_wanted=RESULTS_WANTED,
         hours_old=HOURS_OLD,
     )
-
+    jobs.drop_duplicates(subset=["job_url"], keep="first", inplace=True)
+    jobs = jobs[
+        ["title", "description", "company", "location", "job_url", "date_posted"]
+    ]
     # Convert DataFrame rows to Job objects
     job_list = []
     for _, row in jobs.iterrows():
@@ -82,6 +84,10 @@ def generate_cover_letter(job_description: str, resume: UploadFile) -> str:
         str: A markdown-formatted cover letter that is tailored to the specific job posting.
 
     """
+
+    class CoverLetter(BaseModel):
+        cover_letter: str
+
     # Read and process the uploaded resume file
     resume = read_uploaded_file(resume)
 
@@ -102,12 +108,13 @@ def generate_cover_letter(job_description: str, resume: UploadFile) -> str:
     agent = Agent(
         model=model,
         system_prompt=system_prompt,
+        output_type=CoverLetter,
     )
 
     # Generate the cover letter using the AI model
     return agent.run_sync(
         instruc.format(job_description=job_description, resume=resume)
-    ).output
+    ).output.cover_letter
 
 
 if __name__ == "__main__":
