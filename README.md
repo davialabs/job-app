@@ -19,16 +19,19 @@ This application is built using the **Davia** framework, which helps create a co
 
 ```
 .
-├── .env_example
+├── .env_example           # Example environment variables file
 ├── .gitignore
+├── .python-version        # Python version specification
 ├── README.md
-├── requirements.txt
-├── src
-│   ├── __init__.py
-│   ├── job_search.py  # Main application logic with FastAPI endpoints
-│   ├── models.py      # Pydantic models (e.g., Job)
-│   └── utils.py       # Utility functions (e.g., PDF reader, AI prompt)
-└── .venv/             # Virtual environment (if created)
+├── pyproject.toml         # Project configuration and dependencies
+├── requirements.txt       # Detailed dependencies list
+├── uv.lock                # Lock file for dependencies
+└── src/                   # Source code directory
+    └── job_app/           # Main application package
+        ├── __init__.py
+        ├── job_search.py  # Main application logic with FastAPI endpoints
+        ├── models.py      # Pydantic models (e.g., Job)
+        └── utils.py       # Utility functions (e.g., PDF reader, AI prompt)
 ```
 
 ## Technologies Used
@@ -79,7 +82,7 @@ This application is built using the **Davia** framework, which helps create a co
 To start the backend application, run:
 
 ```bash
-python src/job_search.py
+python -m src.job_app.job_search
 ```
 
 This will typically start a Uvicorn server, and you should see output indicating the address where the API is running.
