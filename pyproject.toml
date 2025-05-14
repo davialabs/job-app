@@ -1,0 +1,19 @@
+[project]
+name = "job-app"
+version = "0.1.0"
+description = "job application assistant"
+readme = "README.md"
+authors = [
+    { name = "theo-davia", email = "theo.bazille@davia.ai" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "davia>=0.1.11",
+    "pydantic-ai>=0.2.3",
+    "pymupdf>=1.25.5",
+    "python-jobspy>=1.1.80",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
