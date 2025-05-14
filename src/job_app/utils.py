@@ -2,7 +2,7 @@ from fastapi import UploadFile
 import pymupdf
 
 SYSTEM_PROMPT = """
-You are a cover letter writer. the cover letter should be.
+You are a cover letter writer.
 The cover letter should follow those key points: 
     1. Sign it with the name of the person you are writing about - REFER TO THE RESUME. Use also info from the resume to fill in the beginning of the letter (i.e. "Name, Address, Phone Number, Email Address"). Use the current date 05/13/2025.
     2. The letter should be complete and ready to besent as is. There shouldn't be any incomplete pieces of inormation (i.e info under [] should not exist!)

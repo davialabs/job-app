@@ -3,9 +3,10 @@ from davia import Davia
 from fastapi import UploadFile
 from pydantic_ai import Agent
 from pydantic_ai.models.gemini import GeminiModel
-from utils import read_uploaded_file, SYSTEM_PROMPT
 from pydantic import BaseModel
-from models import Job
+
+from job_app.models import Job
+from job_app.utils import read_uploaded_file, SYSTEM_PROMPT
 
 # Initialize Davia app - Davia is a framework built on top of FastAPI
 # that simplifies API development and adds additional features
