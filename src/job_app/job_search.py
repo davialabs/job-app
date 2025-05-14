@@ -4,6 +4,7 @@ from fastapi import UploadFile
 from pydantic_ai import Agent
 from pydantic_ai.models.gemini import GeminiModel
 from pydantic import BaseModel
+import time
 
 from job_app.models import Job
 from job_app.utils import read_uploaded_file, SYSTEM_PROMPT
@@ -13,8 +14,8 @@ from job_app.utils import read_uploaded_file, SYSTEM_PROMPT
 app = Davia(title="Job Search")
 
 # Configuration constants for job search
-SITES = ["indeed", "google"]
-RESULTS_WANTED = 40
+SITES = ["indeed"]  # Removed Google as it's more aggressive with rate limiting
+RESULTS_WANTED = 50
 HOURS_OLD = 72
 MODEL = "gemini-2.0-flash"
 
@@ -40,14 +41,30 @@ def display_latest_jobs(job_title: str, job_location: str) -> list[Job | None]:
             - job_url: URL to the job posting
             - date_posted: Date when the job was posted
     """
-    # Scrape jobs from multiple job sites using jobspy
-    jobs = scrape_jobs(
-        site_name=SITES,
-        search_term=job_title,
-        location=job_location,
-        results_wanted=RESULTS_WANTED,
-        hours_old=HOURS_OLD,
-    )
+    # Scrape jobs from job sites using jobspy with retry mechanism
+    max_retries = 3
+    retry_count = 0
+
+    while retry_count < max_retries:
+        try:
+            jobs = scrape_jobs(
+                site_name=SITES,
+                search_term=job_title,
+                location=job_location,
+                results_wanted=RESULTS_WANTED,
+                hours_old=HOURS_OLD,
+            )
+
+            if not jobs.empty:
+                break
+        except Exception as e:
+            retry_count += 1
+            if retry_count >= max_retries:
+                raise Exception(
+                    f"Failed to scrape jobs after {max_retries} attempts: {str(e)}"
+                )
+            time.sleep(5)  # Wait 5 seconds before retrying
+
     jobs.drop_duplicates(subset=["job_url"], keep="first", inplace=True)
     jobs = jobs[
         ["title", "description", "company", "location", "job_url", "date_posted"]
